@@ -1,0 +1,51 @@
+- include_vars: defaults.yml
+
+- name: Install dependencies for theming
+  apt:
+    pkg:
+    - python3-psutil
+    - arc-theme
+
+- name: Copy wallpaper file
+  copy:
+    src: files/wallpaper.jpg
+    dest: "{{ home }}/.wallpaper.jpg"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: '600'
+
+- name: Set GNOME Wallpaper
+  become_user: "{{ user }}"
+  dconf:
+    key: /org/gnome/desktop/background/picture-uri
+    value: "'file://{{ home }}/.wallpaper.jpg'"
+
+- name: Set lock screen background
+  become_user: "{{ user }}"
+  dconf:
+    key: /org/gnome/desktop/screensaver/picture-uri
+    value: "'file://{{ home }}/.wallpaper.jpg'"
+
+- name: Set favorite apps
+  become_user: "{{ user }}"
+  dconf:
+    key: /org/gnome/shell/favorite-apps
+    value: "['org.gnome.Nautilus.desktop', 'google-chrome.desktop', 'htop.desktop', 'org.gnome.Calculator.desktop']"
+
+- name: Set dock to not auto-hide
+  become_user: "{{ user }}"
+  dconf:
+    key: /org/gnome/shell/extensions/dash-to-dock/dock-fixed
+    value: "true"
+
+- name: Position dock in the bottom
+  become_user: "{{ user }}"
+  dconf:
+    key: /org/gnome/shell/extensions/dash-to-dock/dock-position
+    value: "'BOTTOM'"
+
+- name: Set GTK theme
+  become_user: "{{ user }}"
+  dconf:
+    key: /org/gnome/desktop/interface/gtk-theme
+    value: "'Yaru-dark'"

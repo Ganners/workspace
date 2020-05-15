@@ -1,0 +1,6 @@
+- name: install cron job (ansible-pull)
+  cron:
+    user: ansible
+    name: ansible provision
+    minute: '*/10'
+    job: '/usr/bin/ansible-pull -o --vault-password-file {{ home }}/.vault_pass --track-subs -U https://github.com/Ganners/workspace.git > /dev/null'
