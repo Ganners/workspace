@@ -1,0 +1,72 @@
+- name: Install dependencies for guake
+  apt:
+    pkg:
+    - guake
+
+- name: Set toggle keybinding
+  become_user: "{{ user }}"
+  dconf:
+    key: "/apps/guake/keybindings/global/show-hide"
+    value: "'<Alt>z'"
+
+- name: Set window height
+  become_user: "{{ user }}"
+  dconf:
+    key: "/apps/guake/general/window-height"
+    value: "93"
+
+- name: Enable toggle when focus lost
+  become_user: "{{ user }}"
+  dconf:
+    key: "/apps/guake/general/window-losefocus"
+    value: "true"
+
+- name: Hide tab bar
+  become_user: "{{ user }}"
+  dconf:
+    key: "/apps/guake/general/window-tabbar"
+    value: "false"
+
+- name: Enable infinite history
+  become_user: "{{ user }}"
+  dconf:
+    key: "/apps/guake/general/infinite-history"
+    value: "true"
+
+- name: Hide scrollbar
+  become_user: "{{ user }}"
+  dconf:
+    key: "/apps/guake/general/use-scrollbar"
+    value: "false"
+
+- name: Change shell to tmux (which uses fish)
+  become_user: "{{ user }}"
+  dconf:
+    key: "/apps/guake/general/default-shell"
+    value: "'/usr/bin/tmux'"
+
+- name: Change palette to Space Gray
+  become_user: "{{ user }}"
+  dconf:
+    key: "/apps/guake/style/font/palette-name"
+    value: "'Space Gray'"
+
+- name: Change font
+  become_user: "{{ user }}"
+  dconf:
+    key: "/apps/guake/style/font/style"
+    value: "'Inconsolata for Powerline Medium 14'"
+
+- name: Use new font over system default
+  become_user: "{{ user }}"
+  dconf:
+    key: "/apps/guake/general/use-default-font"
+    value: 'false'
+
+- name: Set up autostart
+  file:
+    src: /usr/share/guake/data/guake.template.desktop
+    dest: /etc/xdg/autostart/guake.desktop
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    state: link

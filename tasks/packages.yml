@@ -1,0 +1,83 @@
+- name: Install VMWare utilities
+  apt:
+    pkg:
+    - open-vm-tools-desktop
+
+- name: Install version control systems
+  apt:
+    pkg:
+    - git
+    - mercurial
+
+- name: Install system utilities
+  apt:
+    pkg:
+    - ack
+    - fish
+    - gpg
+    - graphviz
+    - htop
+    - jq
+    - libsecret-tools
+    - tmux
+    - unzip
+    - vim-gtk3
+    - curl
+    - wget
+    - xclip
+    - pandoc
+    - texlive-xetex
+    - texlive-fonts-recommended
+    - texlive-latex-recommended
+
+- name: Install shared packages
+  apt:
+    pkg:
+    - libatlas-base-dev
+
+- name: Install DevOps applications
+  apt:
+    pkg:
+    - mc
+
+- name: Install programs
+  apt:
+    pkg:
+    - chromium-browser
+    - gimp
+
+- name: Install Dropbox
+  apt:
+    deb: https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_amd64.deb
+
+- name: Remove unused pre-installed packages
+  apt:
+    name:
+      - rhythmbox
+      - firefox
+    state: absent
+
+- name: Remove absent packages
+  apt:
+    purge: yes
+
+- name: Download awscli (v2) installer
+  unarchive:
+    src: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+    dest: "{{ executable_temp_dir | default('/tmp') }}"
+    remote_src: yes
+    creates: /tmp/aws
+    mode: 0755
+
+- name: Run the awscli (v2) installer
+  command:
+  args:
+    cmd: "{{ executable_temp_dir | default('/tmp') }}/aws/install"
+    creates: /usr/local/bin/aws
+  become: true
+  register: aws_install
+
+- name: Show awscli (v2) installer output
+  debug:
+    var: aws_install
+    verbosity: 2
