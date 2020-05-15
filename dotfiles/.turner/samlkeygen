@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Set samlkeygen variables and aliases
+ADFS_DOMAIN='Turner'
+ADFS_URL='https://sts.turner.com/adfs/ls/IdpInitiatedSignOn.aspx?loginToRp=urn:amazon:webservices'
+
+docker run -it -v ~/.aws:/aws turnerlabs/samlkeygen authenticate \
+    --user "$USER:$USER" \
+    --url "$ADFS_URL" \
+    --domain "$ADFS_DOMAIN" \
+    --username "$USER" \
+    --all-accounts
+
+sudo chown -R "$USER:$USER" $HOME/.aws

@@ -1,0 +1,36 @@
+- name: Install Programming Languages
+  apt:
+    pkg:
+    - gcc
+    - clang
+    - gdb
+    - radare2
+    - nasm
+    - golang
+    - ghc
+    - nodejs
+    - python3
+    - make
+
+- name: Install python based utils
+  apt:
+    pkg:
+    - python3-pip
+    - python3-gpg
+    - python3-wheel
+    - python-wheel-common
+    - python-is-python3
+
+- name: Install python packages
+  pip:
+    name:
+    - virtualenv==20.0.30
+    - setuptools==49.4.0
+    - torch==1.6.0
+    - tensorflow==2.3.0
+    - scikit-learn==0.23.2
+    - pandas==1.1.0
+    - numpy==1.19.1
+    - matplotlib==3.3.1
+    - scipy==1.5.2
+    - flake8==3.8.3

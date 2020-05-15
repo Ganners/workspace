@@ -1,0 +1,35 @@
+#!/bin/bash
+
+COMMAND=${@:$OPTIND:1}
+shift
+
+if [ "$COMMAND" == "add-generic-password" ]; then
+    while getopts "a:s:w:" flag
+    do
+        case "${flag}" in
+            s) key=${OPTARG};;
+            w) value=${OPTARG};;
+        esac
+    done
+    echo $value | secret-tool store --label=$key turner $key
+fi
+
+if [ "$COMMAND" == "delete-generic-password" ]; then
+    while getopts "a:s:w" flag
+    do
+        case "${flag}" in
+            s) key=${OPTARG};;
+        esac
+    done
+    secret-tool clear turner $key
+fi
+
+if [ "$COMMAND" == "find-generic-password" ]; then
+    while getopts "a:s:w" flag
+    do
+        case "${flag}" in
+            s) key=${OPTARG};;
+        esac
+    done
+    echo $(secret-tool lookup turner $key | xargs)
+fi

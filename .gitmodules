@@ -1,0 +1,12 @@
+[submodule "dotfiles/.vim/bundle/neobundle.vim"]
+	path = dotfiles/.vim/bundle/neobundle.vim
+	url = https://github.com/Shougo/neobundle.vim
+[submodule "files/fonts"]
+	path = files/fonts
+	url = https://github.com/powerline/fonts
+[submodule "dotfiles/.tmux/plugins/tpm"]
+	path = dotfiles/.tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm
+[submodule "dotfiles/.tfenv"]
+	path = dotfiles/.tfenv
+	url = https://github.com/tfutils/tfenv.git

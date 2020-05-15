@@ -1,0 +1,17 @@
+- name: add docker group
+  group:
+    name: docker
+
+- name: add user to docker group
+  user:
+    name: "{{ user }}"
+    append: yes
+    groups:
+     - docker
+
+- name: Install docker applications
+  apt:
+    pkg:
+    - docker.io
+    - docker-registry
+    - docker-compose

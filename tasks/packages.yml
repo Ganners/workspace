@@ -1,0 +1,67 @@
+- name: Install VMWare utilities
+  apt:
+    pkg:
+    - open-vm-tools-desktop
+
+- name: Install version control systems
+  apt:
+    pkg:
+    - git
+    - mercurial
+
+- name: Install system utilities
+  apt:
+    pkg:
+    - ack
+    - fish
+    - gpg
+    - graphviz
+    - htop
+    - jq
+    - libsecret-tools
+    - tmux
+    - unzip
+    - vim-gtk3
+    - curl
+    - wget
+    - xclip
+
+- name: Install shared packages
+  apt:
+    pkg:
+    - libatlas-base-dev
+
+- name: Install DevOps applications
+  apt:
+    pkg:
+    - mc
+    - awscli
+
+- name: Install programs
+  apt:
+    pkg:
+    - chromium-browser
+    - gimp
+
+- name: Install SOPS
+  apt:
+    deb: https://github.com/mozilla/sops/releases/download/v3.5.0/sops_3.5.0_amd64.deb
+
+- name: Install Slack
+  apt:
+    deb: https://downloads.slack-edge.com/linux_releases/slack-desktop-4.8.0-amd64.deb
+
+- name: Install Dropbox
+  apt:
+    deb: https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_amd64.deb
+
+- name: Remove unused pre-installed packages
+  apt:
+    name:
+      - rhythmbox
+      - firefox
+    state: absent
+
+- name: Remove absent packages
+  apt:
+    purge: yes

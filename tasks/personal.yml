@@ -1,0 +1,39 @@
+- name: Ensure Sites directory exists
+  file:
+    dest: "{{ home }}/Sites"
+    state: directory
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: "774"
+
+- name: Clone personal site
+  become_user: "{{ user }}"
+  git:
+    repo: 'git@github.com:Ganners/ganners.git'
+    key_file: "{{ home }}/.ssh/id_rsa"
+    accept_hostkey: yes
+    dest: "{{ home }}/Sites/ganners"
+    clone: yes
+    update: yes
+
+- name: Ensure python directory exists
+  file:
+    dest: "{{ home }}/python"
+    state: directory
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: "774"
+
+- name: Clone mental-gymnastics
+  become_user: "{{ user }}"
+  git:
+    repo: 'git@github.com:Ganners/mental-gymnastics.git'
+    key_file: "{{ home }}/.ssh/id_rsa"
+    accept_hostkey: yes
+    dest: "{{ home }}/python/mental-gymnastics"
+    clone: yes
+    update: yes
+
+- name: Get speed read app
+  script:
+    cmd: '/usr/bin/go get github.com/Ganners/speed-read'

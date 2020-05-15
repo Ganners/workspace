@@ -1,0 +1,16 @@
+- name: Ensure all configured dotfiles exist
+  command: "ls -F {{ home }}/{{ item }}"
+  register: existing_dotfile_info
+  failed_when: false
+  check_mode: false
+  changed_when: false
+  with_items: "{{ dotfiles_files }}"
+
+- name: Override dotfiles in home folder
+  copy:
+    src: "dotfiles/{{ item }}"
+    dest: "{{ home }}/{{ item }}"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: '744'
+  with_items: "{{ dotfiles_files }}"

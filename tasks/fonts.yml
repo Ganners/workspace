@@ -1,0 +1,23 @@
+- name: Install powerline fonts (in submodule)
+  copy:
+    src: "{{ item }}"
+    dest: "/usr/local/share/fonts/"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: '600'
+  with_fileglob:
+    - "files/fonts/Inconsolata/*.ttf"
+    - "files/fonts/Inconsolata/*.otf"
+
+- name: Ensure fontconfig directory exists
+  file:
+    path: "{{ home }}/.config/fontconfig"
+    state: directory
+
+- name: Copy fontconfig
+  copy:
+    src: files/fonts/fontconfig/50-enable-terminess-powerline.conf
+    dest: "{{ home }}/.config/fontconfig/conf.d"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: '600'

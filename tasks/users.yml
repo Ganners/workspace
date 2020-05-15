@@ -1,0 +1,76 @@
+- name: Ensure .ssh directory exists
+  file:
+    dest: "{{ home }}/.ssh"
+    state: directory
+    mode: "700"
+
+- name: copy ssh private key
+  copy:
+    dest: "{{ home }}/.ssh/id_rsa"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: "600"
+    content: "{{ ssh.id_rsa }}"
+
+- name: copy ssh public key
+  copy:
+    dest: "{{ home }}/.ssh/id_rsa.pub"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: "600"
+    content: "{{ ssh.id_rsa_pub }}"
+
+- name: Ensure .aws directory exists
+  file:
+    dest: "{{ home }}/.aws"
+    state: directory
+    mode: "700"
+
+- name: copy aws config
+  copy:
+    dest: "{{ home }}/.aws/config"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: "600"
+    content: "{{ aws.config }}"
+
+- name: copy aws credentials
+  copy:
+    dest: "{{ home }}/.aws/credentials"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: "600"
+    content: "{{ aws.credentials }}"
+
+- name: Change shell for primary user to fish
+  user:
+    name: "{{ user }}"
+    shell: /usr/bin/fish
+
+- name: create ansible user
+  user:
+    name: ansible
+    uid: 900
+
+- name: copy sudoers_ansible
+  copy:
+    src: files/sudoers_ansible
+    dest: /etc/sudoers.d/ansible
+    owner: root
+    group: root
+    mode: "440"
+
+- name: Copy avatar file
+  copy:
+    src: files/avatar.jpg
+    dest: "{{ home }}/.avatar.jpg"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: '600'
+
+- name: Set avatar
+  ini_file:
+    path: "/var/lib/AccountsService/users/{{ user }}"
+    section: User
+    option: Icon
+    value: "{{ home }}/.avatar.jpg"
