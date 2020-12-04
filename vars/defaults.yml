@@ -14,14 +14,6 @@ os_environment:
 - key: GOPATH
   value : /home/mgannaway/go
 - key: PATH
-  value: "{{ home }}/.local/bin:{{ home }}/.tfenv/bin:{{ home }}/.turner:{{ home }}/go/bin:{{ lookup('env','PATH') }}"
+  value: "{{ home }}/miniconda3/bin:{{ home }}/.local/bin:{{ home }}/.tfenv/bin:{{ home }}/.turner:{{ home }}/go/bin:{{ lookup('env','PATH') }}"
 - key: TFWORKSPACE
   value: mganna
-- key: AWS_DEFAULT_REGION
-  value: us-east-1
-- key: AWS_REGION
-  value: us-east-1
-- key: AWS_PROFILE
-  value: mss-cloud-news:aws-mss-cloud-news-devops
-- key: BACKEND_AWS_PROFILE
-  value: mss-cloud-news:aws-mss-cloud-news-devops

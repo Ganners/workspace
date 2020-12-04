@@ -1,0 +1,13 @@
+[DEFAULT]
+okta_username = mark.gannaway@warnermedia.com
+aws_rolename =
+cred_profile = acc:role
+write_aws_creds = True
+output_format = export
+aws_default_duration = 28800
+okta_org_url = https://tw.okta.com
+app_url = https://tw.okta.com/home/amazon_aws/0oan2tf6x27N9TY9F0x7/272
+gimme_creds_server = appurl
+resolve_aws_alias = True
+device_token =
+remember_device = False

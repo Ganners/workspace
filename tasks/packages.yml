@@ -43,14 +43,6 @@
     - chromium-browser
     - gimp
 
-- name: Install SOPS
-  apt:
-    deb: https://github.com/mozilla/sops/releases/download/v3.5.0/sops_3.5.0_amd64.deb
-
-- name: Install Slack
-  apt:
-    deb: https://downloads.slack-edge.com/linux_releases/slack-desktop-4.8.0-amd64.deb
-
 - name: Install Dropbox
   apt:
     deb: https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_amd64.deb

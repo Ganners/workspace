@@ -46,3 +46,19 @@
     group: "{{ user }}"
     mode: "700"
     content: '{{ snowsql.config }}'
+
+- name: ensure .metaflowconfig directory exists
+  file:
+    dest: "{{ home }}/.metaflowconfig"
+    state: directory
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: "700"
+
+- name: configure metaflow config
+  copy:
+    dest: "{{ home }}/.metaflowconfig/config_terraform.json"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: "700"
+    content: '{{ metaflowconfig.config_terraform }}'

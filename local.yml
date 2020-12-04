@@ -6,6 +6,7 @@
     - include_vars: secrets_ssh.yml
     - include_vars: secrets_aws.yml
     - include_vars: secrets_snowsql.yml
+    - include_vars: secrets_metaflow.yml
     - include: tasks/upgrade.yml
   tasks:
     - include: tasks/users.yml
