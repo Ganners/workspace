@@ -3,6 +3,7 @@ home: /home/mgannaway
 dotfiles_files:
 - .flake8
 - .gitconfig
+- .okta_aws_login_config
 - .pylintrc
 - .tfenv/
 - .tmux.conf

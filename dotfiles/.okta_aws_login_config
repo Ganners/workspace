@@ -1,7 +1,7 @@
 [DEFAULT]
 okta_username = mark.gannaway@warnermedia.com
 aws_rolename =
-cred_profile = acc:role
+cred_profile = acc-role
 write_aws_creds = True
 output_format = export
 aws_default_duration = 28800
@@ -11,3 +11,19 @@ gimme_creds_server = appurl
 resolve_aws_alias = True
 device_token =
 remember_device = False
+
+[aws-cnn-mls-dev:aws-cnn-mls-dev-devops]
+aws_rolename = arn:aws:iam::170149655970:role/aws-cnn-mls-dev-devops
+cred_profile = aws-cnn-mls-dev:aws-cnn-mls-dev-devops
+
+[aws-cnn-mls-prod:aws-cnn-mls-prod-devops]
+aws_rolename = arn:aws:iam::359284644261:role/aws-cnn-mls-prod-devops
+cred_profile = aws-cnn-mls-prod:aws-cnn-mls-prod-devops
+
+[aws-news-prod:aws-news-prod-devops]
+aws_rolename = arn:aws:iam::175259281135:role/aws-news-prod-devops
+cred_profile = aws-news-prod:aws-news-prod-devops
+
+[mss-cloud-news:aws-mss-cloud-news-devops]
+aws_rolename = arn:aws:iam::704368634799:role/aws-mss-cloud-news-devops
+cred_profile = mss-cloud-news:aws-mss-cloud-news-devops
