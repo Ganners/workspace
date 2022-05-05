@@ -36,7 +36,15 @@ Modifying secrets
 ansible-vault edit --vault-password-file ~/.vault_pass vars/secrets.yml
 ```
 
+Finishing off the setup
+-----------------------
+
+ - [ ] Install OS updates
+ - [ ] Restart computer
+ - [ ] Authenticate with DropBox and selective sync desired directories
+ - [ ] Press `[Ctrl + a]` + `I` inside TMUX to install TPM plugins
+
 Links
 -----
 
- - [^1]: https://opensource.com/article/18/3/manage-workstation-ansible
+ - (1) https://opensource.com/article/18/3/manage-workstation-ansible

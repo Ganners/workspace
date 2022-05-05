@@ -46,6 +46,23 @@
     - libxext-dev
     - libopenal-dev
 
+- name: Add vulkan apt key
+  ansible.builtin.apt_key:
+    url: http://packages.lunarg.com/lunarg-signing-key-pub.asc
+    state: present
+
+- name: Download vulkan apt sources list
+  get_url:
+    url: http://packages.lunarg.com/vulkan/lunarg-vulkan-focal.list
+    dest: /etc/apt/sources.list.d/lunarg-vulkan-focal.list
+    mode: '755'
+
+- name: Install vukan-sdk
+  apt:
+    update_cache: yes
+    pkg:
+    - vulkan-sdk
+
 # - name: Download miniconda installer
 #   get_url:
 #     url: https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
