@@ -45,6 +45,11 @@
     pkg:
     - libxext-dev
     - libopenal-dev
+    - libqt5webkit5
+    - libxi-dev
+    - libxinerama-dev
+    - libxcursor-dev
+    - xorg-dev
 
 - name: Add vulkan apt key
   ansible.builtin.apt_key:
