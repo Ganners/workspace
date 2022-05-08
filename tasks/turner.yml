@@ -86,12 +86,3 @@
 - name: install webex
   apt:
     deb: https://binaries.webex.com/WebexDesktop-Ubuntu-Official-Package/Webex.deb
-
-- name: download global protect
-  unarchive:
-    src: https://vpn.wisc.edu/clients/PanGPLinux-5.3.2-c3.tgz
-    dest: /tmp
-    remote_src: yes
-
-- name: install global protect
-  command: "dpkg -i /tmp/GlobalProtect_deb-5.3.2.0-3.deb"

@@ -21,4 +21,5 @@
     - include: tasks/gnome.yml
     - include: tasks/guake.yml
     - include: tasks/personal.yml
+    - include: tasks/games.yml
     - include: tasks/turner.yml
