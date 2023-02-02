@@ -1,3 +1,11 @@
+- name: Prepare Kubernetes install
+  apt_key:
+    file: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+
+- name: Add Kubernetes repository
+  apt_repository:
+    repo: "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main"
+
 - name: add docker group
   group:
     name: docker
@@ -15,3 +23,6 @@
     - docker.io
     - docker-registry
     - docker-compose
+    - apt-transport-https
+    - kubectl
+
