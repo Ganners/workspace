@@ -13,56 +13,6 @@
   shell:
     cmd: '{{ home }}/.tfenv/bin/tfenv install 0.12.24'
 
-- name: ensure tfenv versions have correct directory permissions
-  file:
-    path: "{{ home }}/.tfenv/versions/"
-    owner: "{{ user }}"
-    group: "{{ user }}"
-    mode: "774"
-    recurse: yes
-
-- name: use install tfenv version
-  shell:
-    cmd: '{{ home }}/.tfenv/bin/tfenv use 0.12.24'
-
-- name: Install programs
-  apt:
-    pkg:
-    - alien
-
-- name: fetch snowflake rpm
-  get_url:
-    url: https://sfc-repo.snowflakecomputing.com/snowsql/bootstrap/1.2/linux_x86_64/snowflake-snowsql-1.2.9-1.x86_64.rpm
-    dest: '{{ home }}/Downloads/snowflake-snowsql-1.2.9-1.x86_64.rpm'
-
-- name: install snowsql rpm with alien
-  shell:
-    cmd: 'alien -i {{ home }}/Downloads/snowflake-snowsql-1.2.9-1.x86_64.rpm'
-
-- name: configure snowsql connection
-  copy:
-    dest: "{{ home }}/.snowsql/config"
-    owner: "{{ user }}"
-    group: "{{ user }}"
-    mode: "700"
-    content: '{{ snowsql.config }}'
-
-- name: ensure .metaflowconfig directory exists
-  file:
-    dest: "{{ home }}/.metaflowconfig"
-    state: directory
-    owner: "{{ user }}"
-    group: "{{ user }}"
-    mode: "700"
-
-- name: configure metaflow config
-  copy:
-    dest: "{{ home }}/.metaflowconfig/config_terraform.json"
-    owner: "{{ user }}"
-    group: "{{ user }}"
-    mode: "700"
-    content: '{{ metaflowconfig.config_terraform }}'
-
 - name: configure okta config
   copy:
     dest: "{{ home }}/.okta_aws_login_config"
@@ -70,3 +20,37 @@
     group: "{{ user }}"
     mode: "700"
     content: '{{ aws_okta_login_config.file_contents }}'
+
+- name: Install awscli (v1)
+  apt:
+    pkg:
+    - awscli
+
+- name: Install packages for developer-tools
+  apt:
+    pkg:
+    - fzf
+    - pipx
+
+- name: Install aws-sso-util for developer-tools
+  become_user: "{{ user }}"
+  script:
+    cmd: "/usr/bin/pipx install aws-sso-util"
+
+- name: Clone developer-tools
+  become_user: "{{ user }}"
+  git:
+    repo: 'git@github.com:wbd-streaming/developer-tools.git'
+    key_file: "{{ home }}/.ssh/id_rsa"
+    accept_hostkey: yes
+    dest: "{{ home }}/developer-tools"
+    clone: yes
+    update: yes
+
+- name: Run developer-tools setup-aws-sso.sh
+  become_user: "{{ user }}"
+  become: yes
+  environment:
+    PATH: "{{ home }}/.local/bin:/usr/local/bin:/usr/bin"
+  shell:
+    cmd: "/bin/bash {{ home }}/developer-tools/scripts/setup-aws-sso.sh"

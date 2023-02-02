@@ -1,0 +1,28 @@
+- name: Install Fisher
+  block:
+    - name: download fisher
+      get_url:
+        url: https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish
+        dest: "{{ home }}/Downloads/fisher.fish"
+        force: true
+
+    - name: source and install bass
+      become_user: "{{ user }}"
+      become: yes
+      shell:
+        executable: /usr/bin/fish
+        cmd: "source {{ home }}/Downloads/fisher.fish && fisher install edc/bass"
+
+    - name: source and install source-fish
+      become_user: "{{ user }}"
+      become: yes
+      shell:
+        executable: /usr/bin/fish
+        cmd: "source {{ home }}/Downloads/fisher.fish && fisher install yo-goto/source-fish"
+
+    - name: source and install spacefish
+      become_user: "{{ user }}"
+      become: yes
+      shell:
+        executable: /usr/bin/fish
+        cmd: "source {{ home }}/Downloads/fisher.fish && fisher install matchai/spacefish"

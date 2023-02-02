@@ -36,4 +36,4 @@
 
 - name: Get speed read app
   script:
-    cmd: '/usr/bin/go get github.com/Ganners/speed-read'
+    cmd: '/usr/bin/go install github.com/Ganners/speed-read@latest'

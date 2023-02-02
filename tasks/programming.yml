@@ -1,17 +1,23 @@
-- name: Install Programming Languages
+- name: Install Programming Languages & Tools
   apt:
     pkg:
+    - make
     - gcc
     - clang
     - gdb
-    - radare2
     - nasm
-    - golang
     - ghc
     - nodejs
     - npm
     - python3
-    - make
+    - openjdk-17-jdk
+    - openjdk-17-jre
+    - maven
+    - protobuf-compiler
+
+- name: Install Radare2
+  apt:
+    deb: https://github.com/radareorg/radare2/releases/download/5.8.4/radare2_5.8.4_amd64.deb
 
 - name: Install python based utils
   apt:
@@ -25,37 +31,72 @@
 - name: Install python packages
   pip:
     name:
-    - virtualenv==20.0.30
-    - setuptools==49.4.0
-    - torch==1.6.0
-    - tensorflow==2.3.0
-    - scikit-learn==0.23.2
-    - pandas==1.1.0
-    - numpy==1.19.1
-    - matplotlib==3.3.1
-    - scipy==1.5.2
-    - flake8==3.8.3
-    - metaflow==2.2.5
+    - virtualenv==20.23.0
+    - setuptools==67.7.2
+    - torch==1.13.1
+    - tensorflow==2.12.0
+    - scikit-learn==1.2.2
+    - scipy==1.9.2
+    - pandas==2.0.1
+    - numpy==1.23.4
+    - matplotlib==3.7.1
+    - flake8==6.0.0
+    - metaflow==2.8.3
     - jupyter==1.0.0
-    - jupyterlab==2.2.9
-    - gimme-aws-creds==2.4.1
+    - jupyterlab==3.6.3
+    - gimme-aws-creds==2.5.0
 
-# - name: Download miniconda installer
-#   get_url:
-#     url: https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-#     dest: /tmp/Miniconda3-latest-Linux-x86_64.sh
-#     mode: '755'
-# 
-# - name: Install miniconda
-#   command: "bash /tmp/Miniconda3-latest-Linux-x86_64.sh -p {{home}}/miniconda3 -b -u -t"
-# 
-# - name: ensure miniconda3 directory has the correct permissions
-#   file:
-#     path: "{{ home }}/miniconda3"
-#     owner: "{{ user }}"
-#     group: "{{ user }}"
-#     mode: "774"
-#     recurse: yes
-# 
-# - name: Configure miniconda to use fish shell
-#   command: '{{home}}/miniconda3/bin/conda init fish'
+- name: Install headers
+  apt:
+    pkg:
+    - libxext-dev
+    - libopenal-dev
+    - libqt5webkit5
+    - libxi-dev
+    - libxinerama-dev
+    - libxcursor-dev
+    - xorg-dev
+
+- name: Install jdtls
+  block:
+    - name: Create jdtls directory
+      file:
+        path: /usr/local/jdtls
+        state: directory
+        mode: "775"
+
+    - name: Install eclipse.jdt.ls
+      unarchive:
+        src: https://www.eclipse.org/downloads/download.php?file=/jdtls/milestones/1.9.0/jdt-language-server-1.9.0-202203031534.tar.gz
+        dest: /usr/local/jdtls
+        remote_src: true
+        mode: "775"
+
+- name: Copy maven settings
+  copy:
+    dest: "{{ home }}/.m2/settings.xml"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: "700"
+    content: '{{ maven_settings.file_contents }}'
+
+- name: Install latest Golang
+  block:
+    - name: Create go install directory
+      file:
+        path: /usr/local/go
+        state: directory
+        mode: "775"
+
+    - name: Download an unarchive golang installation
+      unarchive:
+        src: https://go.dev/dl/go1.20.12.linux-amd64.tar.gz
+        dest: /usr/local
+        remote_src: true
+        mode: "775"
+
+    - name: Create symbolic link to /usr/bin/go
+      file:
+        src: /usr/local/go/bin/go
+        dest: /usr/bin/go
+        state: link

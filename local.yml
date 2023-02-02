@@ -8,17 +8,20 @@
     - include_vars: secrets_snowsql.yml
     - include_vars: secrets_metaflow.yml
     - include_vars: secrets_aws_okta_login_config.yml
+    - include_vars: secrets_maven_settings.yml
     - include: tasks/upgrade.yml
   tasks:
     - include: tasks/users.yml
     - include: tasks/cron.yml
     - include: tasks/environment_variables.yml
-    - include: tasks/packages.yml
     - include: tasks/programming.yml
+    - include: tasks/packages.yml
+    - include: tasks/fish.yml
     - include: tasks/docker.yml
     - include: tasks/fonts.yml
     - include: tasks/dotfiles.yml
     - include: tasks/gnome.yml
     - include: tasks/guake.yml
     - include: tasks/personal.yml
+    - include: tasks/games.yml
     - include: tasks/turner.yml

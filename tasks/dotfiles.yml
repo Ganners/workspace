@@ -13,4 +13,5 @@
     owner: "{{ user }}"
     group: "{{ user }}"
     mode: '744'
+    directory_mode: '744'
   with_items: "{{ dotfiles_files }}"

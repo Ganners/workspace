@@ -65,8 +65,8 @@
 
 - name: Set up autostart
   file:
-    src: /usr/share/guake/data/guake.template.desktop
-    dest: /etc/xdg/autostart/guake.desktop
+    src: /usr/share/guake/autostart-guake.desktop
+    dest: /etc/xdg/autostart/autostart-guake.desktop
     owner: "{{ user }}"
     group: "{{ user }}"
     state: link

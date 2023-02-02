@@ -1,44 +1,40 @@
-" NeoBundle Setup
-    if has('vim_starting')
-        if &compatible
-            set nocompatible
-        endif
+" Vim-plug Setup
+call plug#begin()
 
-        set runtimepath+=~/.vim/bundle/neobundle.vim/
-    endif
+    Plug 'scrooloose/nerdtree'
+    Plug 'jistr/vim-nerdtree-tabs'
+    Plug 'Shougo/neosnippet.vim'
+    Plug 'Shougo/neosnippet-snippets'
+    Plug 'tpope/vim-fugitive'
+    Plug 'gregsexton/gitv'
+    Plug 'ctrlpvim/ctrlp.vim'
+    Plug 'fatih/vim-go'
+    Plug 'terryma/vim-multiple-cursors'
+    Plug 'tsaleh/vim-align'
+    Plug 'tpope/vim-markdown'
+    Plug 'majutsushi/tagbar'
+    Plug 'itchyny/lightline.vim'
+    Plug 'godlygeek/tabular'
+    Plug 'mattn/gist-vim', {'depends': 'mattn/webapi-vim'}
+    Plug 'davidhalter/jedi-vim'
+    Plug 'hashivim/vim-terraform'
+    Plug 'nvie/vim-flake8'
 
-    call neobundle#begin(expand('~/.vim/bundle'))
+    " https://github.com/artur-shaik/jc.nvim
+    Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'hrsh7th/nvim-cmp'
+    Plug 'mfussenegger/nvim-dap'
+    Plug 'mfussenegger/nvim-jdtls'
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'puremourning/vimspector'
+    Plug 'williamboman/nvim-lsp-installer'
+    Plug 'artur-shaik/jc.nvim'
 
-        " Let NeoBundle manage NeoBundle
-        NeoBundleFetch 'Shougo/neobundle.vim'
+" Call plug#end to update &runtimepath and initialize plugin system
+call plug#end()
 
-        " Add or remove your Bundles here:
-        NeoBundle 'scrooloose/nerdtree'
-        NeoBundle 'jistr/vim-nerdtree-tabs'
-        NeoBundle 'Shougo/neosnippet.vim'
-        NeoBundle 'Shougo/neosnippet-snippets'
-        NeoBundle 'tpope/vim-fugitive'
-        NeoBundle 'gregsexton/gitv'
-        NeoBundle 'ctrlpvim/ctrlp.vim'
-        NeoBundle 'fatih/vim-go'
-        NeoBundle 'terryma/vim-multiple-cursors'
-        NeoBundle 'tsaleh/vim-align'
-        NeoBundle 'tpope/vim-markdown'
-        NeoBundle 'majutsushi/tagbar'
-        NeoBundle 'itchyny/lightline.vim'
-        NeoBundle 'godlygeek/tabular'
-        NeoBundle 'mattn/gist-vim', {'depends': 'mattn/webapi-vim'}
-        NeoBundle 'davidhalter/jedi-vim'
-        NeoBundle 'hashivim/vim-terraform'
-        NeoBundle 'nvie/vim-flake8'
-
-    call neobundle#end()
-
-    filetype plugin indent on
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
+filetype plugin indent on
 
 " Misc configuration
 
@@ -143,3 +139,6 @@ NeoBundleCheck
 
         " Make Flake8 linter execute on save
         autocmd BufWritePost *.py call Flake8()
+
+    " Java
+    lua require('jc').setup{}

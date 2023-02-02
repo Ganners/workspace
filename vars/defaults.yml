@@ -1,6 +1,8 @@
 user: mgannaway
 home: /home/mgannaway
 dotfiles_files:
+- .config/
+- .local/
 - .flake8
 - .gitconfig
 - .pylintrc
@@ -8,12 +10,13 @@ dotfiles_files:
 - .tmux.conf
 - .tmux/
 - .turner/
+- .m2/
 - .vim/
 - .vimrc
 os_environment:
 - key: GOPATH
   value : /home/mgannaway/go
 - key: PATH
-  value: "{{ home }}/miniconda3/bin:{{ home }}/.local/bin:{{ home }}/.tfenv/bin:{{ home }}/.turner:{{ home }}/go/bin:{{ lookup('env','PATH') }}"
+  value: "{{ home }}/miniconda3/bin:{{ home }}/.local/share:{{ home }}/.local/bin:{{ home }}/.tfenv/bin:{{ home }}/.turner:{{ home }}/go/bin:/usr/local/jdtls/bin:/usr/local/neovim/nvim-linux64/bin:{{ lookup('env','PATH') }}"
 - key: TFWORKSPACE
   value: mganna

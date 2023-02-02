@@ -2,7 +2,7 @@ Workstation Configuration
 =========================
 
 This started out from the How to manage your workstation configuration with
-Ansible[^1] guide. The objective is to have a reproducible Ubuntu 20.04
+Ansible[^1] guide. The objective is to have a reproducible Ubuntu 22.04.2
 environment configuration which I can make continually consistent across
 multiple workstations and will enable me to bootstrap new environments
 quickly.
@@ -36,7 +36,16 @@ Modifying secrets
 ansible-vault edit --vault-password-file ~/.vault_pass vars/secrets.yml
 ```
 
+Finishing off the setup
+-----------------------
+
+ - [ ] Install OS updates
+ - [ ] Restart computer
+ - [ ] Authenticate with DropBox and selective sync desired directories
+ - [ ] Press `[Ctrl + a]` + `I` inside TMUX to install TPM plugins
+ - [ ] Open nvim and type `:PlugInstall`
+
 Links
 -----
 
- - [^1]: https://opensource.com/article/18/3/manage-workstation-ansible
+ - (1) https://opensource.com/article/18/3/manage-workstation-ansible
