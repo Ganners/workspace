@@ -52,5 +52,8 @@
   become: yes
   environment:
     PATH: "{{ home }}/.local/bin:/usr/local/bin:/usr/bin"
-  shell:
-    cmd: "/bin/bash {{ home }}/developer-tools/scripts/setup-aws-sso.sh"
+  expect:
+    timeout: 5
+    command: "/bin/bash {{ home }}/developer-tools/scripts/setup-aws-sso.sh"
+    responses:
+      "^For which AWS Organization(.*)$": "2\n"

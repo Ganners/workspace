@@ -2,7 +2,7 @@ Workstation Configuration
 =========================
 
 This started out from the How to manage your workstation configuration with
-Ansible[^1] guide. The objective is to have a reproducible Ubuntu 22.04.2
+Ansible[^1] guide. The objective is to have a reproducible Ubuntu 24.10
 environment configuration which I can make continually consistent across
 multiple workstations and will enable me to bootstrap new environments
 quickly.

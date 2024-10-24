@@ -14,6 +14,8 @@ dotfiles_files:
 - .vim/
 - .vimrc
 os_environment:
+- key: GOROOT
+  value : /usr/local/go
 - key: GOPATH
   value : /home/mgannaway/go
 - key: PATH

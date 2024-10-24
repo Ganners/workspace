@@ -39,6 +39,7 @@
     - graphviz
     - htop
     - jq
+    - yq
     - libsecret-tools
     - tmux
     - unzip
@@ -51,6 +52,7 @@
     - texlive-latex-recommended
     - gdebi
     - gdebi-core
+    - gh
 
 - name: Install system utilities (golang)
   block:
@@ -74,10 +76,6 @@
     - chromium-browser
     - gimp
 
-- name: Install Dropbox
-  apt:
-    deb: https://linux.dropbox.com/ubuntu/pool/main/dropbox_2020.03.04_amd64.deb
-
 - name: Remove unused pre-installed packages
   apt:
     name:
@@ -93,41 +91,7 @@
   block:
     - name: Install protoc-gen-go
       script:
-        cmd: '/usr/bin/go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.28'
+        cmd: '/usr/bin/go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.28.0'
     - name: Install protoc-gen-go-grpc
       script:
-        cmd: '/usr/bin/go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2'
-
-- name: Install GitHub CLI
-  block:
-    - name: download apt key
-      get_url:
-        url: https://cli.github.com/packages/githubcli-archive-keyring.gpg
-        dest: /etc/apt/keyrings/githubcli-archive-keyring.gpg
-        force: true
-
-    - name: add apt key
-      apt_key:
-        file: /etc/apt/keyrings/githubcli-archive-keyring.gpg
-        state: present
-
-    - name: apt source
-      apt_repository:
-        filename: kubernetes
-        repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main"
-        state: present
-        update_cache: true
-
-    - name: install gh
-      apt:
-        pkg:
-          - gh
-
-- name: Install yq
-  block:
-    - name: Install yq
-      unarchive:
-        src: https://github.com/mikefarah/yq/releases/download/v4.40.5/yq_linux_amd64.tar.gz
-        dest: /usr/local/yq
-        remote_src: true
-        mode: "775"
+        cmd: '/usr/bin/go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2.0'
