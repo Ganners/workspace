@@ -9,19 +9,19 @@
     - include_vars: secrets_metaflow.yml
     - include_vars: secrets_aws_okta_login_config.yml
     - include_vars: secrets_maven_settings.yml
-    - include: tasks/upgrade.yml
   tasks:
-    - include: tasks/users.yml
-    - include: tasks/cron.yml
-    - include: tasks/environment_variables.yml
-    - include: tasks/programming.yml
-    - include: tasks/packages.yml
-    - include: tasks/fish.yml
-    - include: tasks/docker.yml
-    - include: tasks/fonts.yml
-    - include: tasks/dotfiles.yml
-    - include: tasks/gnome.yml
-    - include: tasks/guake.yml
-    - include: tasks/personal.yml
-    - include: tasks/games.yml
-    - include: tasks/turner.yml
+    - include_tasks: tasks/upgrade.yml
+    - include_tasks: tasks/users.yml
+    - include_tasks: tasks/cron.yml
+    - include_tasks: tasks/environment_variables.yml
+    - include_tasks: tasks/programming.yml
+    - include_tasks: tasks/packages.yml
+    - include_tasks: tasks/fish.yml
+    - include_tasks: tasks/docker.yml
+    - include_tasks: tasks/fonts.yml
+    - include_tasks: tasks/dotfiles.yml
+    - include_tasks: tasks/gnome.yml
+    - include_tasks: tasks/guake.yml
+    - include_tasks: tasks/personal.yml
+    - include_tasks: tasks/games.yml
+    - include_tasks: tasks/turner.yml
