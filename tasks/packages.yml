@@ -74,10 +74,6 @@
     - chromium-browser
     - gimp
 
-- name: Install Dropbox
-  apt:
-    deb: https://linux.dropbox.com/ubuntu/pool/main/dropbox_2020.03.04_amd64.deb
-
 - name: Remove unused pre-installed packages
   apt:
     name:
@@ -114,7 +110,7 @@
     - name: apt source
       apt_repository:
         filename: kubernetes
-        repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main"
+        repo: "deb [arch=arm64 signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main"
         state: present
         update_cache: true
 

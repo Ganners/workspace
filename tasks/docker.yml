@@ -41,7 +41,7 @@
   block:
     - name: download kubectl (downgraded)
       get_url:
-        url: https://dl.k8s.io/release/v1.23.17/bin/linux/amd64/kubectl
+        url: https://dl.k8s.io/release/v1.23.17/bin/linux/arm64/kubectl
         dest: /usr/local/bin/kubectl
         force: true
         mode: "755"

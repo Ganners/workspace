@@ -10,6 +10,7 @@
     - nodejs
     - npm
     - python3
+    - virtualenv
     - openjdk-17-jdk
     - openjdk-17-jre
     - maven
@@ -17,7 +18,7 @@
 
 - name: Install Radare2
   apt:
-    deb: https://github.com/radareorg/radare2/releases/download/5.8.4/radare2_5.8.4_amd64.deb
+    deb: https://github.com/radareorg/radare2/releases/download/5.9.6/radare2_5.9.6_arm64.deb
 
 - name: Install python based utils
   apt:
@@ -30,8 +31,9 @@
 
 - name: Install python packages
   pip:
+    virtualenv: "{{ home }}/venv"
+    virtualenv_site_packages: true
     name:
-    - virtualenv==20.23.0
     - setuptools==67.7.2
     - torch==1.13.1
     - tensorflow==2.12.0
@@ -88,9 +90,9 @@
         state: directory
         mode: "775"
 
-    - name: Download an unarchive golang installation
+    - name: Download and unarchive golang installation
       unarchive:
-        src: https://go.dev/dl/go1.20.12.linux-amd64.tar.gz
+        src: https://go.dev/dl/go1.23.2.linux-arm64.tar.gz
         dest: /usr/local
         remote_src: true
         mode: "775"
