@@ -41,7 +41,9 @@ Finishing off the setup
 
  - [ ] Install OS updates
  - [ ] Restart computer
- - [ ] Authenticate with DropBox and selective sync desired directories
+ - [ ] Run `PATH="$PATH:$HOME/.local/bin" $HOME/developer-tools/scripts/setup-aws-sso.sh`.
+       It's too much effort to set it up with `expect`...
+ - [ ] Authenticate with Dropbox and selective sync desired directories
  - [ ] Press `[Ctrl + a]` + `I` inside TMUX to install TPM plugins
  - [ ] Open nvim and type `:PlugInstall`
 

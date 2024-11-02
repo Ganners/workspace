@@ -46,14 +46,3 @@
     dest: "{{ home }}/developer-tools"
     clone: yes
     update: yes
-
-- name: Run developer-tools setup-aws-sso.sh
-  become_user: "{{ user }}"
-  become: yes
-  environment:
-    PATH: "{{ home }}/.local/bin:/usr/local/bin:/usr/bin"
-  expect:
-    timeout: 5
-    command: "/bin/bash {{ home }}/developer-tools/scripts/setup-aws-sso.sh"
-    responses:
-      "^For which AWS Organization(.*)$": "2\n"

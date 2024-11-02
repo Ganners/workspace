@@ -23,4 +23,5 @@
     - include_tasks: tasks/gnome.yml
     - include_tasks: tasks/guake.yml
     - include_tasks: tasks/personal.yml
+    - include_tasks: tasks/browsers.yml
     - include_tasks: tasks/turner.yml

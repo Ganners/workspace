@@ -1,0 +1,6 @@
+- name: install and default chromium
+  block:
+    - name: ensure chromium is installed
+      apt:
+        name: chromium-browser
+        state: present

@@ -16,6 +16,7 @@
     - docker.io
     - docker-registry
     - docker-compose
+    - docker-buildx
 
 - name: Install Kubectl
   block:

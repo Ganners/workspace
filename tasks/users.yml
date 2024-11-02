@@ -23,6 +23,8 @@
 - name: Ensure .aws directory exists
   file:
     dest: "{{ home }}/.aws"
+    owner: "{{ user }}"
+    group: "{{ user }}"
     state: directory
     mode: "700"
 

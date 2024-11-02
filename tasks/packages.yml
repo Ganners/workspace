@@ -9,26 +9,26 @@
     - git
     - mercurial
 
-- name: Install editor utilities
-  apt:
-    pkg:
-    - vim-gtk3
-    state: latest
-
-- name: Install latest neovim
+- name: Install editor & utilities
   block:
-    - name: Create neovim directory
-      file:
-        path: /usr/local/neovim
-        state: directory
-        mode: "775"
+    - name: install neovim
+      apt:
+        pkg:
+        - vim-gtk3
+        - neovim
+        state: latest
 
-    - name: Install neovim
-      unarchive:
-        src: https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
-        dest: /usr/local/neovim
-        remote_src: true
-        mode: "775"
+    - name: remove vim (rename vim-classic)
+      command: mv /usr/bin/vim /usr/bin/vim-classic
+
+    - name: remove vi (rename vi-classic)
+      command: mv /usr/bin/vi /usr/bin/vi-classic
+
+    - name: link vim to nvim
+      file:
+        src: /usr/bin/nvim
+        dest: /usr/bin/vim
+        state: link
 
 - name: Install system utilities (apt)
   apt:
@@ -73,7 +73,6 @@
 - name: Install programs
   apt:
     pkg:
-    - chromium-browser
     - gimp
 
 - name: Remove unused pre-installed packages

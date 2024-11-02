@@ -30,7 +30,7 @@
   become_user: "{{ user }}"
   dconf:
     key: /org/gnome/shell/favorite-apps
-    value: "['org.gnome.Nautilus.desktop', 'google-chrome.desktop', 'htop.desktop', 'org.gnome.Calculator.desktop']"
+    value: "['org.gnome.Nautilus.desktop', 'chromium_chromium.desktop', 'htop.desktop', 'org.gnome.Calculator.desktop']"
 
 - name: Set dock to not auto-hide
   become_user: "{{ user }}"

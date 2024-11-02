@@ -22,3 +22,5 @@ os_environment:
   value: "{{ home }}/miniconda3/bin:{{ home }}/.local/share:{{ home }}/.local/bin:{{ home }}/.tfenv/bin:{{ home }}/.turner:{{ home }}/go/bin:/usr/local/jdtls/bin:/usr/local/neovim/nvim-linux64/bin:{{ lookup('env','PATH') }}"
 - key: TFWORKSPACE
   value: mganna
+- key: BROWSER
+  value: /usr/bin/chromium-browser
